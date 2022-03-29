@@ -5,6 +5,7 @@ public class Test {
 		// TODO Auto-generated method stub
 		String test = "This is a test commit";
 		System.out.print(test);
+		int y = 6;
 	}
 
 }
