@@ -13,7 +13,7 @@ public class Stops {
 	public double stop_lon;
 	public String zone_id;  
 	public String stop_url;
-	public String location_type;
+	public String location_type;  
 	public String parent_station;
 
 	public ArrayList<Stops> stops;
