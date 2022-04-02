@@ -11,7 +11,7 @@ public class Stops {
 	public String stop_desc;
 	public double stop_lat;
 	public double stop_lon;
-	public String zone_id;
+	public String zone_id;  
 	public String stop_url;
 	public String location_type;
 	public String parent_station;
