@@ -18,7 +18,7 @@ public class Stops {
 
 	public ArrayList<Stops> stops;
 
-	Stops(int stop_id, String stop_name){
+	Stops(int stop_id, String stop_name){ 
 		this.stop_id = stop_id;
 		this.stop_name = stop_name;
 	}
