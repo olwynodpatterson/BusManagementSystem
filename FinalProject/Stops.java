@@ -37,7 +37,7 @@ public class Stops {
 	                    int stopID = sc.nextInt();
 	                    sc.next();
 	                    String stopName = sc.next();
-	                    stops.add(new Stops(stopID, stopName)); //stops array list is currently size = 0 
+	                    stops.add(new Stops(stopID, stopName)); 
 	                    sc.nextLine();
 	                }
 	            }
