@@ -14,18 +14,20 @@ public class Stops {
 	public String zone_id;  
 	public String stop_url;
 	public String location_type;  
-	public String parent_station;
-
-	public ArrayList<Stops> stops;
-
+	public String parent_station; 
+	public ArrayList<Stops> stops = new ArrayList<Stops>(); //array list that will contain all the stops 
+	
+	Stops(){ //default constructor	
+	}
+	
 	Stops(int stop_id, String stop_name){ 
 		this.stop_id = stop_id;
 		this.stop_name = stop_name;
 	}
 	
-	 private void Stops() {
+	 private void readInStops() {
 	        try {
-	            String filename = "Input Files\stops.txt";
+	            String filename = "Input Files\\stops.txt";
 	            File file = new File(filename);
 	            Scanner sc = new Scanner(file);
 	            sc.useDelimiter(",");
@@ -35,7 +37,7 @@ public class Stops {
 	                    int stopID = sc.nextInt();
 	                    sc.next();
 	                    String stopName = sc.next();
-	                    stops.add(new Stops(stopID, stopName));
+	                    stops.add(new Stops(stopID, stopName)); //stops array list is currently size = 0 
 	                    sc.nextLine();
 	                }
 	            }
@@ -47,8 +49,9 @@ public class Stops {
 
 
 	public static void main(String[] args) {
-
-
+		Stops test = new Stops();
+		test.readInStops();
+   
 	}
 
 }
