@@ -8,7 +8,7 @@
  *  Does not allow duplicates.
  *
  ******************************************************************************/
-
+//Adjusted from ST.java provoided in slides
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;

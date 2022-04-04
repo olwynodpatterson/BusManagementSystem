@@ -8,3 +8,5 @@
 /Stop_Times.class
 /Transfers.class
 /ST.class
+/DirectedEdge.class
+/EdgeWeightedDigraph.class
