@@ -19,13 +19,17 @@ public class Stops {
 
 	Stops(){ //default constructor	
 	}
+	
+	Stops(String stop_name){ 
+		this.stop_name = stop_name;
+	}
 
 	Stops(int stop_id, String stop_name){ 
 		this.stop_id = stop_id;
 		this.stop_name = stop_name;
 	}
 
-	private void readInStops() {
+	public void readInStops() {
 		try {
 			String filename = "Input Files\\stops.txt";
 			File file = new File(filename);

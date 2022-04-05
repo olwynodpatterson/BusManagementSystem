@@ -24,6 +24,20 @@ public class UserInterface {
 			}
 			else if(userInput.equals("B")) {
 				//Search bus stops
+				
+				System.out.print("Enter bus stop full name or first few characters :");
+				String userInputStop = input.nextLine();
+				if () { //userInput in the list
+					//need to read in all stops here and then search through that array list with a TST
+					Stops userStop = new Stops();
+					userStop.readInStops();
+					ST TST = new ST();
+					TST.get(userInputStop);
+				}
+				else {
+					System.out.print("Error. Bus stop not in system.");
+				}
+				
 			}
 			else if (userInput.equals("C")) {
 				// Search with arrival times
