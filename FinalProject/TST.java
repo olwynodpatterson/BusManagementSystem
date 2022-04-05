@@ -17,9 +17,16 @@ public class TST<Value>
 					int stopID = sc.nextInt();
 					sc.next();
 					String stopName = sc.next();
-					if (stopName.startsWith("WB")|| stopName.startsWith("NB") || stopName.startsWith("SB") || stopName.startsWith("EB")) {
+					if (stopName.startsWith("WB") || stopName.startsWith("NB") || stopName.startsWith("SB") || stopName.startsWith("EB")) {
 						//do something to split string and add prefix to end
-						Stops stops = new Stops(stopID, stopName);
+						String [] stopNameSplit = stopName.split(" ");
+						String stopNameUpdate = "";
+						for (int i = 1; i < stopNameSplit.length; i ++) {
+							String stopNameTemp = stopNameSplit[i];
+							stopNameUpdate.concat(stopNameTemp + " ");
+						}
+						String stopNameFinal = stopNameUpdate.concat(stopNameSplit[0]);	
+						Stops stops = new Stops(stopID, stopNameFinal);
 						put(stops.stop_name, stops);
 						sc.nextLine();
 					}
