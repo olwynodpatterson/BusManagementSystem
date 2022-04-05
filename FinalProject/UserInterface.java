@@ -24,20 +24,23 @@ public class UserInterface {
 			}
 			else if(userInput.equals("B")) {
 				//Search bus stops
-				
+
 				System.out.print("Enter bus stop full name or first few characters :");
 				String userInputStop = input.nextLine();
-				if () { //userInput in the list
-					//need to read in all stops here and then search through that array list with a TST
-					Stops userStop = new Stops();
-					userStop.readInStops();
-					ST TST = new ST();
+				//symbol table will have [stops.getname, stops] 
+				//then will search for user input in keys
+				TST TST = new TST();
+				String file = "Input Files\\stops.txt";
+				TST.fileToTST(file);
+				if(TST.get(userInputStop) != null){  //need to be able to handle only a few characters of stop name
 					TST.get(userInputStop);
+					System.out.print("Success. Bus stop in system.");
 				}
 				else {
 					System.out.print("Error. Bus stop not in system.");
 				}
-				
+
+
 			}
 			else if (userInput.equals("C")) {
 				// Search with arrival times
