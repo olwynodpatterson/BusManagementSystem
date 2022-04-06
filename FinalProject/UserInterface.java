@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 //User Interface of the project
 public class UserInterface {
-	
+
 	public static boolean validTime(String time) {
 		String timeFormat = "((\\s?)[0-9]|[01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]";
 		Pattern pattern = Pattern.compile(timeFormat);
@@ -16,9 +16,9 @@ public class UserInterface {
 		}
 		Matcher matcher = pattern.matcher(time);
 		return matcher.matches();
-		
+
 	}
-	
+
 	private static ArrayList readInStopTimes(String filename) {
 		ArrayList<Stop_Times> stopTimes = new ArrayList();
 		try {
@@ -32,9 +32,17 @@ public class UserInterface {
 					String arrivalTime = sc.next();
 					String departureTime = sc.next();
 					if(validTime(arrivalTime)) {
-						stopTimes.add(new Stop_Times(tripID, arrivalTime, departureTime));
-						sc.nextLine();
+						if(arrivalTime.charAt(0) == ' ') {
+							String updatedArrivalTime = arrivalTime.replace(' ', '0');						
+							stopTimes.add(new Stop_Times(tripID, updatedArrivalTime, departureTime));
+							sc.nextLine();
+						}
+						else {
+							stopTimes.add(new Stop_Times(tripID, arrivalTime, departureTime));
+							sc.nextLine();
+						}
 					}
+
 					else sc.nextLine();					
 				}
 			}
@@ -44,9 +52,9 @@ public class UserInterface {
 			stopTimes = null;
 			return null;
 		}
-		
+
 	}
-	
+
 	public static String editName(String name) {
 		String finalName = "";
 		if(name.startsWith("FLAGSTOP") || name.startsWith("WB") || name.startsWith("NB") || name.startsWith("SB") || name.startsWith("EB")){
@@ -60,35 +68,35 @@ public class UserInterface {
 		}
 		else return name;
 	}
-	
-	 public static TST fileToTST(String filename) {
-		 TST TST = new TST();
-			try {
-				File file = new File(filename);
-				Scanner sc = new Scanner(file);
-				sc.useDelimiter(",");
-				sc.nextLine();
-				while (sc.hasNext()) {
-					if (sc.hasNextInt()) {
-						int stopID = sc.nextInt();
-						sc.next();
-						String stopName = sc.next();
-						String stopNameUpdate1 = editName(stopName);
-						String stopNameUpdate2 = editName(stopNameUpdate1);
-						Stops stops = new Stops(stopID, stopNameUpdate2);
-						TST.put(stops.stop_name, stops);
-						sc.nextLine();
 
-					}
+	public static TST fileToTST(String filename) {
+		TST TST = new TST();
+		try {
+			File file = new File(filename);
+			Scanner sc = new Scanner(file);
+			sc.useDelimiter(",");
+			sc.nextLine();
+			while (sc.hasNext()) {
+				if (sc.hasNextInt()) {
+					int stopID = sc.nextInt();
+					sc.next();
+					String stopName = sc.next();
+					String stopNameUpdate1 = editName(stopName);
+					String stopNameUpdate2 = editName(stopNameUpdate1);
+					Stops stops = new Stops(stopID, stopNameUpdate2);
+					TST.put(stops.stop_name, stops);
+					sc.nextLine();
+
 				}
-				sc.close();
-				return TST;
-			} catch (FileNotFoundException e) {
-				return null;
 			}
+			sc.close();
+			return TST;
+		} catch (FileNotFoundException e) {
+			return null;
 		}
-	    
-	
+	}
+
+
 
 	public static void main(String[] args) {
 
@@ -127,9 +135,7 @@ public class UserInterface {
 					}
 					Stops stopOutput =  busStops.get(stop);	
 					System.out.println("\nStop Name: " + stopOutput.stop_name + ", Stop ID: " + stopOutput.stop_id);
-					
 				}
-
 
 			}
 			else if (userInput.equals("C")) {
@@ -137,20 +143,22 @@ public class UserInterface {
 				System.out.print("Enter an arrival time as hh:mm:ss : ");
 				String userInputTime = input.nextLine();
 				String filename = "Input Files\\stop_times.txt";
-				ArrayList<Stops> arr = new ArrayList();
+				ArrayList<Stop_Times> arr = new ArrayList();
 				validTime(userInputTime);
 				arr = readInStopTimes(filename);
 				if(validTime(userInputTime)) {
-					System.out.print("Valid time");
+					int countValid = 0;
 					for(int i=0; i<arr.size(); i++) {
-						Stops tempStop = new Stops();
+						Stop_Times tempStop = new Stop_Times();
 						tempStop =  arr.get(i);
+						if(userInputTime.equals(tempStop.arrival_time)) {
+							System.out.print("\nTrip ID: " + tempStop.trip_id + ", Arrival time: " + tempStop.arrival_time + ", Departure time: " + tempStop.departure_time);
+							countValid++;
+						}
 					}
-
-					
-//					else {
-//						System.out.print("Sorry. There were no stops found for that time.");
-//					}
+					if (countValid == 0){
+						System.out.print("Sorry. There were no stops found for that time.");
+					}
 				}
 				else {
 					System.out.println("Error. Invalid time");
