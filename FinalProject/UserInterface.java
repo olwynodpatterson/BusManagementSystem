@@ -8,6 +8,157 @@ import java.util.regex.Pattern;
 //User Interface of the project
 public class UserInterface {
 
+	public static void shortestPath(int stopID1, int stopID2)
+	{
+		ArrayList<Stops> stopsArray = new ArrayList<Stops>();
+		ArrayList<Stop_Times> stopTimesArray = new ArrayList<Stop_Times>();
+		ArrayList<Transfers> transfersArray = new ArrayList<Transfers>();
+		try
+		{
+			File stopsFile = new File("Input\\stops.txt");
+			Scanner sc1 = new Scanner(stopsFile);
+			sc1.useDelimiter(",");
+			sc1.nextLine();
+			while (sc1.hasNext()) {
+				if (sc1.hasNextInt()) {
+					int stopID = sc1.nextInt();
+					sc1.next();
+					String stopName = sc1.next();
+					stopsArray.add(new Stops(stopID, stopName));
+				}
+			}
+			int numberOfVertices = stopsArray.size(); //number of stops
+			EdgeWeightedDigraph graph = new EdgeWeightedDigraph(numberOfVertices);
+
+
+			File stopTimesFile = new File("Input\\stop_times.txt");
+			Scanner sc2 = new Scanner(stopTimesFile);
+			sc2.useDelimiter(",");
+			sc2.nextLine();
+			while(sc2.hasNextLine()){
+				if (sc2.hasNextInt()) {
+					int tripID = sc2.nextInt();
+					sc2.next();
+					sc2.next();
+					int stopID = sc2.nextInt();
+					stopTimesArray.add(new Stop_Times(tripID, stopID));
+				}
+			}
+			//setting edges from stop_times.txt
+			for(int i = 0; i < stopTimesArray.size(); i++)
+			{
+				if(stopTimesArray.get(i).trip_id == stopTimesArray.get(i+1).trip_id)
+				{
+					//if 2 consecutive stops have same tripID - add edge (cost 1 as comes from stop_times.txt)
+					DirectedEdge edge = new DirectedEdge(stopTimesArray.get(i).stop_id, stopTimesArray.get(i+1).stop_id, 1);
+					graph.addEdge(edge);
+				}
+			}
+
+			File transfersFile = new File("Input\\transfers.txt");
+			Scanner sc3 = new Scanner(transfersFile);
+			sc3.useDelimiter(",|\\n");
+			sc3.nextLine(); //skips first line of text file
+			while(sc3.hasNextLine()){
+				if(sc3.hasNextInt()) {
+					int fromStopID = sc3.nextInt();
+					int toStopID = sc3.nextInt();
+					int transferType = sc3.nextInt();
+					String minTransferTime = sc3.next();
+					transfersArray.add(new Transfers(fromStopID, toStopID, transferType, Integer.parseInt(minTransferTime)));
+					sc3.nextLine();
+				}
+			}
+			//setting edges from transfers.txt
+			for(int i = 0; i < transfersArray.size(); i++)
+			{
+				if(transfersArray.get(i).transfer_type == 0)
+				{
+					DirectedEdge edge = new DirectedEdge(transfersArray.get(i).from_stop_id, transfersArray.get(i).to_stop_id, 2);
+					graph.addEdge(edge);
+				}
+				else if(transfersArray.get(i).transfer_type == 2)
+				{
+					DirectedEdge edge = new DirectedEdge(transfersArray.get(i).from_stop_id, transfersArray.get(i).to_stop_id, (transfersArray.get(i).min_transfer_time / 100));
+					graph.addEdge(edge);
+				}
+			}
+		} catch(Exception e) {
+		}
+	}
+
+
+
+
+
+//	private ArrayList<Integer> fileToArrayList (String filename) {
+//		ArrayList<Integer> stopTimes = new ArrayList();
+//		try {
+//			File file = new File(filename);
+//			Scanner sc = new Scanner(file);
+//			sc.useDelimiter(",");
+//			sc.nextLine();
+//			while (sc.hasNext()) {
+//				if (sc.hasNextInt()) { 
+//					int tripID = sc.nextInt();
+//					sc.next();
+//					sc.next();
+//					int fromStopID = sc.nextInt();
+//					sc.nextLine();
+//					stopTimes.add(tripID);
+//				}
+//			}
+//
+//		}catch (FileNotFoundException e) {
+//		}
+//		return stopTimes;
+//	}
+
+
+//
+//	private void filetoEWG(String filename) {
+//		try {
+//			File file = new File(filename);
+//			Scanner sc = new Scanner(file);
+//			sc.useDelimiter(",");
+//			sc.nextLine();
+//			while (sc.hasNext()) {
+//				if (sc.hasNextInt()) { 
+//					int tripID = sc.nextInt();
+//					sc.next();
+//					sc.next();
+//					int fromStopID = sc.nextInt();
+//					sc.nextLine();
+//				}
+//			} 
+//		}catch (FileNotFoundException e) {
+//			//no file
+//		}
+//	}
+
+//	private void fileToGraph(String filename) {
+//		try {
+//			File file = new File(filename);
+//			Scanner sc = new Scanner(file);
+//			sc.useDelimiter(",|\\n");
+//			sc.nextLine();
+//			while (sc.hasNext()) {
+//				if (sc.hasNextInt()) {
+//					int fromStopID = sc.nextInt();
+//					int toStopID = sc.nextInt();
+//					int transferType = sc.nextInt();
+//					String minTransferTime = sc.next();
+//
+//					//transfers.add(new Transfers(fromStopID, toStopID, transferType, Integer.parseInt(minTransferTime)));
+//					sc.nextLine();
+//				}
+//			}	
+//			sc.close();
+//		} catch (FileNotFoundException e) {
+//			//transfers = null;
+//		}
+//	}
+
 	public static boolean validTime(String time) {
 		String timeFormat = "((\\s?)[0-9]|[01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]";
 		Pattern pattern = Pattern.compile(timeFormat);
@@ -116,6 +267,18 @@ public class UserInterface {
 			}
 			else if (userInput.equals("A")) {
 				//shortest path 
+				System.out.print("Please enter a bus stop: ");
+				String userInputStop1 = input.nextLine();
+				System.out.print("\nPlease enter another bus stop: ");
+				String userInputStop2 = input.nextLine();
+				String transfersFile = "Input Files\\transfers.txt";
+				String stopTimesFile = "Input Files\\stop_times.txt";
+				//Dijkstra SP = new Dijkstra(file);
+
+				//EdgeWeightedDigraph EWG = new EdgeWeightedDigraph(8757); //calculated number of vertices outside programme
+
+
+
 			}
 			else if(userInput.equals("B")) {
 				//Search bus stops

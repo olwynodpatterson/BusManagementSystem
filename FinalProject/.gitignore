@@ -17,3 +17,12 @@
 /Queue.class
 /Queue$LinkedIterator.class
 /Queue$Node.class
+/DijkstraSP.class
+/IndexMinPQ.class
+/IndexMinPQ$HeapIterator.class
+/Bag.class
+/Bag$LinkedIterator.class
+/Bag$Node.class
+/StdRandom.class
+/In.class
+/Dijkstra.class

@@ -27,6 +27,11 @@ public class Stop_Times {
 		this.arrival_time = arrival_time;
 		this.departure_time = departure_time;	
 	}
+	
+	Stop_Times(int trip_id, int stop_id){
+		this.trip_id = trip_id;
+		this.stop_id = stop_id;		
+	}
 
 	private void readInStopTimes() {
 		try {
