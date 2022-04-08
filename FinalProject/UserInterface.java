@@ -281,13 +281,26 @@ public class UserInterface {
 				arr = readInStopTimes(filename);
 				if(validTime(userInputTime)) {
 					int countValid = 0;
+					ArrayList<Stop_Times> equal = new ArrayList();
 					for(int i=0; i<arr.size(); i++) {
 						Stop_Times tempStop = new Stop_Times();
 						tempStop =  arr.get(i);
-						if(userInputTime.equals(tempStop.arrival_time)) {
-							System.out.print("\nTrip ID: " + tempStop.trip_id + ", Arrival time: " + tempStop.arrival_time + ", Departure time: " + tempStop.departure_time);
+						if(userInputTime.equals(tempStop.arrival_time)) { 						
+							equal.add(tempStop);
 							countValid++;
 						}
+					}					
+					Integer [] sortArr = new Integer[equal.size()];
+					for(int j = 0; j<equal.size(); j++) {
+						sortArr[j] = equal.get(j).trip_id;
+					}
+					Insertion.sort(sortArr);
+					for(int k = 0; k <sortArr.length; k++) {
+						for(int i = 0; i <sortArr.length; i++) {
+							if(sortArr[k] == equal.get(i).trip_id) {
+								System.out.print("\nTrip ID: " + sortArr[k] + ", Arrival time: " + equal.get(i).arrival_time + ", Departure time: " + equal.get(i).departure_time);
+							}
+						}	
 					}
 					if (countValid == 0){
 						System.out.print("Sorry. There were no stops found for that time.");
