@@ -219,34 +219,37 @@ public class UserInterface {
 				+ "\n A. Find shortest path between two bus stops\n B. Search for bus stop by full name"
 				+ "\n C. Search for all trips with a given arrival time\n");
 
-
+		Scanner initialInput = new Scanner(System.in);
 		Scanner input = new Scanner(System.in);
 
 		while(quit == false) {
 			System.out.print("\nEnter A, B or C or 'quit' : ");
-			String userInput = input.nextLine();
+			String userInput = initialInput.next();
 			if (userInput.equals("quit")) {
 				quit = true;
 			}
 			else if (userInput.equals("A")) {
 				//shortest path 
 				System.out.print("Please enter a bus stop: ");
-				int userInputStop1 = input.nextInt();
-				System.out.print("\nPlease enter another bus stop: ");
-				int userInputStop2 = input.nextInt();
-				String stopsFile = "Input Files\\stops.txt";
-				String stopTimesFile = "Input Files\\stop_times.txt";
-				String transfersFile = "Input Files\\transfers.txt";
-				
-				EdgeWeightedDigraph EWD = createGraph(readInStopsForSP(stopsFile), readInStopTimesForSP(stopTimesFile), readInTransfersForSP(transfersFile)); 
-				//System.out.print("Successfully created EWG");
-				DijkstraSP SP = new DijkstraSP(EWD, userInputStop1);
-				//use path to to get path and then dist to to get cost of that path
-				Iterable<DirectedEdge> shortestPath = SP.pathTo(userInputStop2);
-				//SP.distTo(userInputStop2);
-				System.out.println("The shortest path between " + userInputStop1 + " and " + userInputStop2 + " is: ");
-				System.out.println(shortestPath.toString());
-				System.out.println("The total cost of the trip is: " + SP.distTo(userInputStop2));
+				if(input.hasNextInt()) {
+					int userInputStop1 = input.nextInt();
+					System.out.print("\nPlease enter another bus stop: ");
+					int userInputStop2 = input.nextInt();
+					String stopsFile = "Input Files\\stops.txt";
+					String stopTimesFile = "Input Files\\stop_times.txt";
+					String transfersFile = "Input Files\\transfers.txt";
+					
+					EdgeWeightedDigraph EWD = createGraph(readInStopsForSP(stopsFile), readInStopTimesForSP(stopTimesFile), readInTransfersForSP(transfersFile)); 
+					DijkstraSP SP = new DijkstraSP(EWD, userInputStop1);
+					//use path to to get path and then dist to to get cost of that path
+					Iterable<DirectedEdge> shortestPath = SP.pathTo(userInputStop2);
+					System.out.println("The shortest path between " + userInputStop1 + " and " + userInputStop2 + " is: ");
+					System.out.println(shortestPath.toString());
+					System.out.println("The total cost of the trip is: " + SP.distTo(userInputStop2));
+				}
+				else {
+					System.out.print("Error. Invalid input.");
+				}
 
 
 			}
@@ -314,6 +317,7 @@ public class UserInterface {
 				System.out.println("Error. Invalid input");
 			}
 		}
+		initialInput.close();
 		input.close();
 		System.out.print("Thank you & Goodbye");
 
