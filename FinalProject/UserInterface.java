@@ -225,15 +225,15 @@ public class UserInterface {
 		while(quit == false) {
 			System.out.print("\nEnter A, B or C or 'quit' : ");
 			String userInput = initialInput.next();
-			if (userInput.equals("quit")) {
+			if (userInput.equalsIgnoreCase("quit")) {
 				quit = true;
 			}
-			else if (userInput.equals("A")) {
+			else if (userInput.equalsIgnoreCase("A")) {
 				//shortest path 
 				System.out.print("Please enter a bus stop: ");
 				if(input.hasNextInt()) {
 					int userInputStop1 = input.nextInt();
-					System.out.print("\nPlease enter another bus stop: ");
+					System.out.print("Please enter another bus stop: ");
 					int userInputStop2 = input.nextInt();
 					String stopsFile = "Input Files\\stops.txt";
 					String stopTimesFile = "Input Files\\stop_times.txt";
@@ -243,7 +243,7 @@ public class UserInterface {
 					DijkstraSP SP = new DijkstraSP(EWD, userInputStop1);
 					//use path to to get path and then dist to to get cost of that path
 					Iterable<DirectedEdge> shortestPath = SP.pathTo(userInputStop2);
-					System.out.println("The shortest path between " + userInputStop1 + " and " + userInputStop2 + " is: ");
+					System.out.println("\nThe shortest path between " + userInputStop1 + " and " + userInputStop2 + " is: ");
 					System.out.println(shortestPath.toString());
 					System.out.println("The total cost of the trip is: " + SP.distTo(userInputStop2));
 				}
@@ -253,10 +253,10 @@ public class UserInterface {
 
 
 			}
-			else if(userInput.equals("B")) {
+			else if(userInput.equalsIgnoreCase("B")) {
 				//Search bus stops
 				System.out.print("Enter bus stop full name or first few characters :");
-				String userInputStop = input.nextLine();
+				String userInputStop = input.nextLine().toUpperCase();
 				String file = "Input Files\\stops.txt";
 				TST<Stops> busStops = fileToTST(file);
 				Iterable<String> stops = busStops.keysWithPrefix(userInputStop);
@@ -274,13 +274,13 @@ public class UserInterface {
 				}
 
 			}
-			else if (userInput.equals("C")) {
+			else if (userInput.equalsIgnoreCase("C")) {
 				// Search with arrival times
 				System.out.print("Enter an arrival time as hh:mm:ss : ");
 				String userInputTime = input.nextLine();
 				String filename = "Input Files\\stop_times.txt";
 				ArrayList<Stop_Times> arr = new ArrayList();
-				validTime(userInputTime);
+				//validTime(userInputTime);
 				arr = readInStopTimes(filename);
 				if(validTime(userInputTime)) {
 					int countValid = 0;
@@ -301,7 +301,7 @@ public class UserInterface {
 					for(int k = 0; k <sortArr.length; k++) {
 						for(int i = 0; i <sortArr.length; i++) {
 							if(sortArr[k] == equal.get(i).trip_id) {
-								System.out.print("\nTrip ID: " + sortArr[k] + ", Arrival time: " + equal.get(i).arrival_time + ", Departure time: " + equal.get(i).departure_time);
+								System.out.println("\nTrip ID: " + sortArr[k] + ", Arrival time: " + equal.get(i).arrival_time + ", Departure time: " + equal.get(i).departure_time);
 							}
 						}	
 					}
