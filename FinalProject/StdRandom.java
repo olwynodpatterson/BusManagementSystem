@@ -1,79 +1,8 @@
-
-
-/******************************************************************************
- *  Compilation:  javac StdRandom.java
- *  Execution:    java StdRandom
- *  Dependencies: StdOut.java
- *
- *  A library of static methods to generate pseudo-random numbers from
- *  different distributions (bernoulli, uniform, gaussian, discrete,
- *  and exponential). Also includes a method for shuffling an array.
- *
- *
- *  %  java StdRandom 5
- *  seed = 1316600602069
- *  59 16.81826  true 8.83954  0 
- *  32 91.32098  true 9.11026  0 
- *  35 10.11874  true 8.95396  3 
- *  92 32.88401  true 8.87089  0 
- *  72 92.55791  true 9.46241  0 
- *
- *  % java StdRandom 5
- *  seed = 1316600616575
- *  96 60.17070  true 8.72821  0 
- *  79 32.01607  true 8.58159  0 
- *  81 59.49065  true 9.10423  1 
- *  96 51.65818  true 9.02102  0 
- *  99 17.55771  true 8.99762  0 
- *
- *  % java StdRandom 5 1316600616575
- *  seed = 1316600616575
- *  96 60.17070  true 8.72821  0 
- *  79 32.01607  true 8.58159  0 
- *  81 59.49065  true 9.10423  1 
- *  96 51.65818  true 9.02102  0 
- *  99 17.55771  true 8.99762  0 
- *
- *
- *  Remark
- *  ------
- *    - Relies on randomness of nextDouble() method in java.util.Random
- *      to generate pseudo-random numbers in [0, 1).
- *
- *    - This library allows you to set and get the pseudo-random number seed.
- *
- *    - See http://www.honeylocust.com/RngPack/ for an industrial
- *      strength random number generator in Java.
- *
- ******************************************************************************/
-
+//adapted from book
 
 import java.util.Random;
 
-/**
- *  The {@code StdRandom} class provides static methods for generating
- *  random number from various discrete and continuous distributions, 
- *  including uniform, Bernoulli, geometric, Gaussian, exponential, Pareto,
- *  Poisson, and Cauchy. It also provides method for shuffling an
- *  array or subarray and generating random permutations.
- *  <p>
- *  By convention, all intervals are half open. For example,
- *  <code>uniform(-1.0, 1.0)</code> returns a random number between
- *  <code>-1.0</code> (inclusive) and <code>1.0</code> (exclusive).
- *  Similarly, <code>shuffle(a, lo, hi)</code> shuffles the <code>hi - lo</code>
- *  elements in the array <code>a[]</code>, starting at index <code>lo</code>
- *  (inclusive) and ending at index <code>hi</code> (exclusive).
- *  <p>
- *  The methods all take constant expected time, except those that involve arrays.
- *  The <em>shuffle</em> method takes time linear in the subarray to be shuffled;
- *  the <em>discrete</em> methods take time linear in the length of the argument
- *  array.
- *  <p>
- *  For additional documentation,
- *  see <a href="https://introcs.cs.princeton.edu/22library">Section 2.2</a> of
- *  <i>Computer Science: An Interdisciplinary Approach</i>
- *  by Robert Sedgewick and Kevin Wayne.
- *
+/*
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */

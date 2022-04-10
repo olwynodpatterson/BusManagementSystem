@@ -4,7 +4,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//Class for reading in stop_times.txt file
 public class Stop_Times {
 
 	public int 	trip_id;

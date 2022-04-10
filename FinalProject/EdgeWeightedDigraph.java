@@ -1,49 +1,9 @@
 //adapted from book
-/******************************************************************************
- *  Compilation:  javac EdgeWeightedDigraph.java
- *  Execution:    java EdgeWeightedDigraph digraph.txt
- *  Dependencies: Bag.java DirectedEdge.java
- *  Data files:   https://algs4.cs.princeton.edu/44sp/tinyEWD.txt
- *                https://algs4.cs.princeton.edu/44sp/mediumEWD.txt
- *                https://algs4.cs.princeton.edu/44sp/largeEWD.txt
- *
- *  An edge-weighted digraph, implemented using adjacency lists.
- *
- ******************************************************************************/
 
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
-/**
- *  The {@code EdgeWeightedDigraph} class represents a edge-weighted
- *  digraph of vertices named 0 through <em>V</em> - 1, where each
- *  directed edge is of type {@link DirectedEdge} and has a real-valued weight.
- *  It supports the following two primary operations: add a directed edge
- *  to the digraph and iterate over all of edges incident from a given vertex.
- *  It also provides methods for returning the indegree or outdegree of a
- *  vertex, the number of vertices <em>V</em> in the digraph, and
- *  the number of edges <em>E</em> in the digraph.
- *  Parallel edges and self-loops are permitted.
- *  <p>
- *  This implementation uses an <em>adjacency-lists representation</em>, which
- *  is a vertex-indexed array of {@link Bag} objects.
- *  It uses &Theta;(<em>E</em> + <em>V</em>) space, where <em>E</em> is
- *  the number of edges and <em>V</em> is the number of vertices.
- *  All instance methods take &Theta;(1) time. (Though, iterating over
- *  the edges returned by {@link #adj(int)} takes time proportional
- *  to the outdegree of the vertex.)
- *  Constructing an empty edge-weighted digraph with <em>V</em> vertices
- *  takes &Theta;(<em>V</em>) time; constructing an edge-weighted digraph
- *  with <em>E</em> edges and <em>V</em> vertices takes
- *  &Theta;(<em>E</em> + <em>V</em>) time. 
- *  <p>
- *  For additional documentation,
- *  see <a href="https://algs4.cs.princeton.edu/44sp">Section 4.4</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
- */
+
 public class EdgeWeightedDigraph {
     private static final String NEWLINE = System.getProperty("line.separator");
 

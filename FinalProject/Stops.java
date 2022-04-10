@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//Class for reading in stops.txt file
 public class Stops {
 	public int stop_id;
 	public int stop_code;
