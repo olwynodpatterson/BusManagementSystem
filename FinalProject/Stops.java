@@ -20,42 +20,11 @@ public class Stops {
 	Stops(){ //default constructor	
 	}
 	
-	Stops(String stop_name){ 
-		this.stop_name = stop_name;
-	}
 
 	Stops(int stop_id, String stop_name){ 
 		this.stop_id = stop_id;
 		this.stop_name = stop_name;
 	}
 
-//	public void readInStops() {
-//		try {
-//			String filename = "Input Files\\stops.txt";
-//			File file = new File(filename);
-//			Scanner sc = new Scanner(file);
-//			sc.useDelimiter(",");
-//			sc.nextLine();
-//			while (sc.hasNext()) {
-//				if (sc.hasNextInt()) {
-//					int stopID = sc.nextInt();
-//					sc.next();
-//					String stopName = sc.next();
-//					stops.add(new Stops(stopID, stopName)); 
-//					sc.nextLine();
-//				}
-//			}
-//			sc.close();
-//		} catch (FileNotFoundException e) {
-//			stops = null;
-//		}
-//	}
-
-
-//	public static void main(String[] args) {
-//		Stops test = new Stops();
-//		test.readInStops();
-//
-//	}
 
 }

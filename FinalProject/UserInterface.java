@@ -8,30 +8,6 @@ import java.util.regex.Pattern;
 //User Interface of the project
 public class UserInterface {
 
-
-	public static ArrayList<Stops> readInStopsForSP(String filename){
-		ArrayList<Stops> stops = new ArrayList();
-		try {
-			File stopsFile = new File(filename);
-			Scanner sc1 = new Scanner(stopsFile);
-			sc1.useDelimiter(",");
-			sc1.nextLine();
-			while (sc1.hasNext()) {
-				if (sc1.hasNextInt()) {
-					int stopID = sc1.nextInt();
-					sc1.next();
-					String stopName = sc1.next();
-					stops.add(new Stops(stopID, stopName));
-					sc1.nextLine();
-				}
-			}
-			return stops;
-		} catch(FileNotFoundException e) {
-			stops = null;
-			return null;
-		}
-	}
-
 	public static ArrayList<Stop_Times> readInStopTimesForSP(String filename){
 		ArrayList<Stop_Times> stopTimes = new ArrayList();
 		try {
@@ -75,7 +51,7 @@ public class UserInterface {
 					int toStopID = sc3.nextInt();
 					int transferType = sc3.nextInt();
 					//String minTransferTime = sc3.next();
-					transfers.add(new Transfers(fromStopID, toStopID, transferType)); //deal wit this
+					transfers.add(new Transfers(fromStopID, toStopID, transferType)); 
 					sc3.nextLine();
 				}
 			}
@@ -87,7 +63,7 @@ public class UserInterface {
 		}		
 	}
 
-	public static EdgeWeightedDigraph createGraph(ArrayList<Stops> stops, ArrayList<Stop_Times> stopTimes, ArrayList<Transfers> transfers) {
+	public static EdgeWeightedDigraph createGraph(ArrayList<Stop_Times> stopTimes, ArrayList<Transfers> transfers) {
 		int vertices = stopTimes.size();
 		EdgeWeightedDigraph EWD = new EdgeWeightedDigraph(vertices);
 		
@@ -240,7 +216,7 @@ public class UserInterface {
 						String stopTimesFile = "Input Files\\stop_times.txt";
 						String transfersFile = "Input Files\\transfers.txt";
 						
-						EdgeWeightedDigraph EWD = createGraph(readInStopsForSP(stopsFile), readInStopTimesForSP(stopTimesFile), readInTransfersForSP(transfersFile)); 
+						EdgeWeightedDigraph EWD = createGraph(readInStopTimesForSP(stopTimesFile), readInTransfersForSP(transfersFile)); 
 						DijkstraSP SP = new DijkstraSP(EWD, userInputStop1);
 						//use path to to get path and then dist to to get cost of that path
 						Iterable<DirectedEdge> shortestPath = SP.pathTo(userInputStop2);

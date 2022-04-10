@@ -1,3 +1,4 @@
+//adapted from book
 /******************************************************************************
  *  Compilation:  javac IndexMinPQ.java
  *  Execution:    java IndexMinPQ

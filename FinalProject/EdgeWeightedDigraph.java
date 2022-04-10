@@ -1,4 +1,4 @@
-
+//adapted from book
 /******************************************************************************
  *  Compilation:  javac EdgeWeightedDigraph.java
  *  Execution:    java EdgeWeightedDigraph digraph.txt

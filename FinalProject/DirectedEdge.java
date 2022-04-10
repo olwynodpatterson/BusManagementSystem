@@ -1,4 +1,4 @@
-
+//adapted from book
 /******************************************************************************
  *  Compilation:  javac DirectedEdge.java
  *  Execution:    java DirectedEdge

@@ -33,33 +33,5 @@ public class Stop_Times {
 		this.stop_id = stop_id;		
 	}
 
-	private void readInStopTimes() {
-		try {
-			String filename = "Input Files\\stop_times.txt";
-			File file = new File(filename);
-			Scanner sc = new Scanner(file);
-			sc.useDelimiter(",");
-			sc.nextLine();
-			while (sc.hasNext()) {
-				if (sc.hasNextInt()) { 
-					int tripID = sc.nextInt();
-					String arrivalTime = sc.next();
-					String departureTime = sc.next();
-					stop_times.add(new Stop_Times(tripID, arrivalTime, departureTime));
-					sc.nextLine();
-				}
-			}
-			sc.close();
-		} catch (FileNotFoundException e) {
-			stop_times = null;
-		}
-	}
-
-	public static void main(String[] args) {
-		Stop_Times test = new Stop_Times();
-		test.readInStopTimes();
-
-
-	}
 
 }
